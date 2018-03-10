@@ -1,0 +1,14 @@
+{
+  "name": "cartcore",
+  "version": "0.0.1",
+  "description": "The Core of the shopping cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest "
+  },
+  "author": "C Riddell",
+  "license": "MIT",
+  "dependencies": {
+    "shortid": "^2.2.8"
+  }
+}
