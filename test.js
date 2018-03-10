@@ -217,7 +217,7 @@ test('Calculate shopping basket total',()=>{
   cart.add(salad);
   cart.add(irnBru);
 
-  expect(cart.total()).toEqual(11.88) // Including tax
+  expect(cart.total()).toEqual(11.88); // Including tax
 });
 
 
