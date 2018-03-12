@@ -18,7 +18,7 @@ cart.add(salad);
 cart.add(salad);
 cart.add(irnBru);
 
-expect(cart.total()).toEqual(11.88)
+cart.total()
 ```
 
 ### Class Structure
@@ -57,3 +57,74 @@ eg:
 Gets the price
 ###### `generateSku()`     Return: -
 Generates an SKU for the product.. which is basically a unique product ID. It's saved as a class attribute for that constructed product.
+
+## Future Work / Ideas
+
+### Deals blueprint
+A mechanisim for attaching a deal (discount / offer) against a particular Product.
+
+```javascript
+{
+  multiple: 2,
+  price: null
+}
+  ```
+  The deal object properties are:
+  * `multiple`: The number of the product that needs to be in the basket before the deal is enabled
+  * `price`: Will give a mechanism to override the price for that particular deal. Iff price is null or undefined, then use the product price
+  if price is null or undefined, then use the product price
+
+#### Deals examples
+  ```javascript
+  let threeFor130 =  { // specific deal
+    multiple: 3
+    price: 130
+  };
+
+  let bogof = {
+    multiple: 2,
+    price: null
+  }
+```
+
+* generate list of deals from basket:
+  * Look through all items in basket + add deals against products to list
+  * Give deals taken boolean attributekey deals off sku. one deal per product
+
+eg:
+```javascript
+let deals =  [{sku:'skuxyz',
+    required: 2,
+    price: null,
+    found: 0,
+    enabled: false
+  },
+  {sku:'skuabc',
+      required: 3,
+      price: 140.00,
+      found: 0,
+      enabled: false
+    }
+];
+```
+
+```javascript
+// check if item already exists in basket
+let index = this.basket.findIndex((item) => {
+  return sku === item.sku
+});
+
+if (index === -1){
+  this.basket.push({...item, count: 0}); // Product not already in basket, so add it
+} else {
+  this.basket[index]
+}
+```
+* Look through all item in basket
+* When find item that has recorded deal against it then decrement deal count in list ( or increment deal found)
+when count is 0 (or deal found === deal count)
+then enable deal as active - switch it, don't do anything now
+
+* Check for actionable deals:
+  * Look through deals list.
+  * Apply discounts or adjust total accordingly.

@@ -54,16 +54,6 @@ test('Check VAT on Grocery', () => {
   expect(milk.price).toEqual(2.20);
 });
 
-test('Create Grocery with deal two for one', () => {
-  let apple = new Grocery(1.40, 'apple', {
-      multiple: 2,
-      price: null
-    });
-  expect(apple.price).toEqual(1.54);
-  expect(apple.offer.multiple).toEqual(2);
-  expect(apple.offer.price).toEqual(null);
-});
-
 test('Try to add no products to the cart', () => {
   expect.hasAssertions(); // prepare for assertions
 
@@ -219,23 +209,3 @@ test('Calculate shopping basket total',()=>{
 
   expect(cart.total()).toEqual(11.88); // Including tax
 });
-
-
-
-
-
-// Deal rules:
-// multiple is for how many in Deal
-// price is the price for taht deal
-// if price is null or undefined, then use the product price
-
-// Deals:
-// let threeFor130 =  {
-//   multiple: 3
-//   price: 130
-// };
-//
-// let bogof = {
-//   multiple: 2,
-//   price: null
-// }
