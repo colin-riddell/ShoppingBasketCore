@@ -6,6 +6,9 @@ class CartCore {
     this.basket = [];
   }
 
+  /*
+    Calculates and returns the total of all the items in the basket
+  */
   total() {
     let total = 0;
 
@@ -16,6 +19,9 @@ class CartCore {
     return Math.round(total * 100) / 100;// Round to two dp
   }
 
+  /*
+    Add a product to the basket. Needs to be of instance  Product at least
+  */
   add(item) {
     // Do some checks on type and existence of our argument.
     if (item === undefined){
@@ -25,11 +31,13 @@ class CartCore {
     }
 
     this.basket.push(item);
-
     // Was going to make the basket list key'd off SKU, but we need to be able
     // to put multiple of the same SKU into the basket.
   }
 
+  /*
+    Remove a product from the basket, given that items unique ID (SKU)
+  */
   remove(sku) {
     if (this.basket.length <= 0){
       throw new Error('Cart is already empty');
@@ -38,11 +46,15 @@ class CartCore {
     let index =  this.basket.findIndex((item)=>{
       return sku === item.sku
     });
-    // remvove - Note: splice operates directly on the data, and doesn't
+
+    //Note: splice operates directly on the data, and doesn't
     // return another array
     this.basket.splice(index, 1);
   }
 
+  /*
+    Remove all the products from the basket.
+  */
   empty() {
     if (this.basket.length <= 0){
       throw new Error('Cart is already empty');
@@ -51,6 +63,9 @@ class CartCore {
     this.basket.splice(0, this.basket.length);
   }
 
+  /*
+    Helper to list basket contents in JSON
+  */
   listBasket(){
     for (let item in this.basket) {
       console.log(JSON.stringify(this.basket, null, 2));

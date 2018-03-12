@@ -51,12 +51,16 @@ The constructor accepts three arguments, the first two are required:
 
 eg:
 
-`new WhiteGood(150.00, 'RubixCube')`
+`new WhiteGood(150.00, 'DVDPlayer')`
 ##### Product Methods
 ###### `getPrice()`     Return: `Integer`
 Gets the price
 ###### `generateSku()`     Return: -
 Generates an SKU for the product.. which is basically a unique product ID. It's saved as a class attribute for that constructed product.
+###### `applyVat()`     Return: -
+Adds vat onto the product. Requires the vat
+
+
 
 ## Future Work / Ideas
 
@@ -111,7 +115,7 @@ let deals =  [{sku:'skuxyz',
 ```javascript
 // check if item already exists in basket
 let index = this.basket.findIndex((item) => {
-  return sku === item.sku
+  return sku === item.sku;
 });
 
 if (index === -1){
