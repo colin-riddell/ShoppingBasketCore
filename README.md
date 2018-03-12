@@ -1,5 +1,8 @@
 # ShoppingBasketCore
 
+![Image of Pretty Screenshot](https://raw.githubusercontent.com/colin-riddell/ShoppingBasketCore/master/example.png)
+
+
 ## High level dependencies
 
 * Node.js v=>8.2.1 (tested)
@@ -20,11 +23,14 @@ Run tests:
 let salad = new Grocery(3.90, 'salad');
 let irnBru = new Grocery(3.00, 'irnBru');
 
+let television = new WhiteGood(300, 'Colour TV');
+
 let cart = new CartCore();
 
 cart.add(salad);
 cart.add(salad);
 cart.add(irnBru);
+cart.add(television);
 
 cart.total(); // Gives a total
 cart.empty();
