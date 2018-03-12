@@ -1,9 +1,17 @@
 # ShoppingBasketCore
 
-Install dependencies:
-```npm install```
+## High level dependencies
 
-Run tests: ``` npm test ```
+* Node.js v=>8.2.1 (tested)
+
+## Package dependencies
+Install dependencies:
+* ```npm install```
+
+## Run all tests
+
+Run tests:
+* ``` npm test ``` (invokes jest)
 
 ## Documentation
 
@@ -18,7 +26,8 @@ cart.add(salad);
 cart.add(salad);
 cart.add(irnBru);
 
-cart.total()
+cart.total(); // Gives a total
+cart.empty();
 ```
 
 ### Class Structure
@@ -57,9 +66,18 @@ eg:
 Gets the price
 ###### `generateSku()`     Return: -
 Generates an SKU for the product.. which is basically a unique product ID. It's saved as a class attribute for that constructed product.
-###### `applyVat()`     Return: -
+###### `applyVat(int)`     Return: -
 Adds vat onto the product. Requires the vat
 
+
+#### Grocery
+
+Grocery *is a* Product. Grocery inherits from Product as its base class.
+
+Grocery is different from product in that it has a specific VAT value.
+Product can be specialised on and used as a base class to **demonstrate Object Orientated** programming.
+
+Product can be used as a base class to specify and build many product types with different VAT values.
 
 
 ## Future Work / Ideas
