@@ -26,10 +26,12 @@ class Product {
     return shortid.generate();
   }
 
-  constructor(price, name) {
+  constructor(price, name, deal) {
     this.price = price;
     this.name = name;
     this.sku = this.generateSku();
+
+    this.deal = deal;
   }
 }
 

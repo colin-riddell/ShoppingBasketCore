@@ -1,9 +1,15 @@
 const Product = require('./Product');
 
-
 class CartCore {
   constructor(){
     this.basket = [];
+  }
+  
+  applyDealDiscounts(){
+    // get list of deals
+    // total  number of products that have the deal in the basket
+    // do total -  (total % modMul)
+    // apply discount to new total
   }
 
   /*
