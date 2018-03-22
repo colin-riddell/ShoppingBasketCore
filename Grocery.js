@@ -3,8 +3,8 @@ const Product = require('./Product');
 // A Grocery *is a*  Product!
 class Grocery extends Product {
 
-  constructor(price, name){
-    super(price, name);
+  constructor(price, name, deal){
+    super(price, name, deal);
     if (price === undefined){
       throw new Error('Grocery constructor must have a price');
     }

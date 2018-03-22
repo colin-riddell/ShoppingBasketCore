@@ -170,3 +170,19 @@ test('Calculate shopping basket total',()=>{
 
   expect(cart.total()).toEqual(11.88); // Including tax
 });
+//
+// test('Add two items with same deal',()=>{
+//   let salad = new Grocery(3.90, 'salad', {
+//     modMul: 2,
+//     discountMultiplier: 0.5,
+//     count: 0
+//   });
+//   let cart = new CartCore();
+//
+//   cart.add(salad);
+//   cart.add(salad);
+//   cart.applyDealDiscounts();
+//
+//   expect(cart.deals.length).toEqual(1);
+//
+// });

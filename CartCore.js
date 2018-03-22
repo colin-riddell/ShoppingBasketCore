@@ -3,13 +3,57 @@ const Product = require('./Product');
 class CartCore {
   constructor(){
     this.basket = [];
+    this.deals = []; // array of: {sku: {deal}}
   }
-  
+
+  addDeal(deal, sku, price) {
+    // Check a deal doesn't already exist by looking up the sku
+    // if it doesn't, add it.
+    var search =  this.deals.find((item) => {
+      return item.sku === sku;
+    });
+
+    if (search === undefined) {
+      let addedSku = deal['sku'] = sku;
+      deal['price'] = price;
+      this.deals.push(deal);
+    }
+  }
+
   applyDealDiscounts(){
-    // get list of deals
-    // total  number of products that have the deal in the basket
-    // do total -  (total % modMul)
-    // apply discount to new total
+    // loop over basket to make list of deals from basket
+    // count how many products have deals in basket, save that to deal object
+    // do total -  (total % modMul) when totaling the elegable deals to round down
+    // work out discount by   (N  * price ) * dicount multiplier
+
+    var deals = [];
+    this.basket.forEach((item) => {
+      //console.log(item);
+      if( item.deal !== undefined) {
+        this.addDeal(item.deal, item.sku, item.price);
+      }
+    });
+
+    // count how many products have deals in basket, save that to deal object
+    let totalDiscount = 0;
+    this.deals.forEach((deal) =>{
+      this.basket.forEach((item) =>{
+        if (deal.sku === item.sku) {
+          deal.count += 1;
+        }
+      });
+
+      // Round down when counting the number of elegable deals.
+      var newCount = deal.count - (deal.count % deal.modMul);
+      deal.count = newCount;
+
+      // Store the  discount against the deal.
+      deal.discount = (deal.count * deal.price) * deal.discountMultiplier;
+      totalDiscount += deal.discount;
+    });
+    //console.log(deals);
+
+    return totalDiscount;
   }
 
   /*
@@ -22,7 +66,8 @@ class CartCore {
     for (let i = 0; i < this.basket.length; i++){
       total += this.basket[i].getPrice();
     }
-    return Math.round(total * 100) / 100;// Round to two dp
+    var newTotal = total - this.applyDealDiscounts();
+    return Math.round(newTotal * 100) / 100;// Round to two dp
   }
 
   /*
